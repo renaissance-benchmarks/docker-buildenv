@@ -20,6 +20,12 @@ VERSIONS = [
         "maintainer": "horky@d3s.mff.cuni.cz",
         "package": "java-11-openjdk-devel",
     },
+    {
+        "name": "openj9-openjdk11",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.11%2B9_openj9-0.26.0/OpenJDK11U-jdk_x64_linux_openj9_11.0.11_9_openj9-0.26.0.tar.gz",
+        "basedir": "jdk-11.0.11+9",
+    },
 ]
 
 COMMON_PACKAGES = [
