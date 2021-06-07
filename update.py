@@ -22,12 +22,17 @@ VERSIONS = [
     },
 ]
 
+COMMON_PACKAGES = [
+    "ca-certificates",
+    "git",
+]
+
 DOCKERFILE_TEMPLATE_FROM_PACKAGE = '''
 FROM fedora:34
 MAINTAINER {maintainer_email}
 LABEL maintainer="{maintainer_email}"
 
-RUN dnf install -y ca-certificates git \\
+RUN dnf install -y {common_packages} \\
     && dnf install -y {package} \\
     && dnf clean all
 
@@ -41,7 +46,7 @@ FROM fedora:34
 MAINTAINER {maintainer_email}
 LABEL maintainer="{maintainer_email}"
 
-RUN dnf install -y ca-certificates git \\
+RUN dnf install -y {common_packages} \\
     && dnf clean all \\
     && curl "{tarball_url}" -o "/tmp/{tarball_basename}.tar.gz" \\
     && tar -xz -C /opt -f "/tmp/{tarball_basename}.tar.gz" \\
@@ -56,13 +61,16 @@ CMD ["/bin/bash"]
 """
 
 def update_version(dockerfile, config):
+    common_packages = " ".join(COMMON_PACKAGES)
     if 'package' in config:
         dockerfile.write(DOCKERFILE_TEMPLATE_FROM_PACKAGE.format(
+            common_packages=common_packages,
             maintainer_email=config['maintainer'],
             package=config['package'],
         ))
     else:
         dockerfile.write(DOCKERFILE_TEMPLATE_FROM_TARBALL.format(
+            common_packages=common_packages,
             maintainer_email=config['maintainer'],
             tarball_basename=config['basedir'],
             tarball_basedir=config['basedir'],
