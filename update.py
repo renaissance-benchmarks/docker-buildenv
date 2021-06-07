@@ -25,6 +25,7 @@ VERSIONS = [
 COMMON_PACKAGES = [
     "ca-certificates",
     "git",
+    "unzip",
 ]
 
 DOCKERFILE_TEMPLATE_FROM_PACKAGE = '''
