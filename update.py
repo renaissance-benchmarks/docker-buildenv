@@ -49,7 +49,7 @@ LABEL maintainer="{maintainer_email}"
 
 RUN dnf install -y {common_packages} \\
     && dnf clean all \\
-    && curl "{tarball_url}" -o "/tmp/{tarball_basename}.tar.gz" \\
+    && curl -L "{tarball_url}" -o "/tmp/{tarball_basename}.tar.gz" \\
     && tar -xz -C /opt -f "/tmp/{tarball_basename}.tar.gz" \\
     && rm -f "/tmp/{tarball_basename}.tar.gz" \\
     && printf 'export JAVA_HOME="%s"\\nexport PATH="$JAVA_HOME/bin:$PATH"\\n' "/opt/{tarball_basedir}" >/etc/profile.d/java_from_opt.sh \\
