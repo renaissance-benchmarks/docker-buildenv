@@ -48,6 +48,9 @@ CMD ["/bin/bash"]
 
 '''
 
+# Following is not needed as we install Java via alternatives
+# printf 'export JAVA_HOME="%s"\\nexport PATH="$JAVA_HOME/bin:$PATH"\\n' "/opt/{tarball_basedir}" >/etc/profile.d/java_from_opt.sh \\
+
 DOCKERFILE_TEMPLATE_FROM_TARBALL = """
 FROM fedora:34
 MAINTAINER {maintainer_email}
@@ -58,7 +61,12 @@ RUN dnf install -y {common_packages} \\
     && curl -L "{tarball_url}" -o "/tmp/{tarball_basename}.tar.gz" \\
     && tar -xz -C /opt -f "/tmp/{tarball_basename}.tar.gz" \\
     && rm -f "/tmp/{tarball_basename}.tar.gz" \\
-    && printf 'export JAVA_HOME="%s"\\nexport PATH="$JAVA_HOME/bin:$PATH"\\n' "/opt/{tarball_basedir}" >/etc/profile.d/java_from_opt.sh \\
+    && alternatives --install /usr/bin/java java /opt/{tarball_basedir}/bin/java 10 \\
+    && for i in /opt/{tarball_basedir}/bin/*; do \\
+        ii="$( basename "$i" )"; \\
+        [ "$ii" != "java" ] \\
+            && alternatives --add-slave java "/opt/{tarball_basedir}/bin/java" "/usr/bin/$ii" "$ii" "/opt/{tarball_basedir}/bin/$ii"; \\
+    done \\
     && ln -sf /etc/pki/java/cacerts /opt/{tarball_basedir}/lib/security/ \\
     && /opt/{tarball_basedir}/bin/java -version
 
