@@ -14,6 +14,7 @@ RUN dnf install -y ca-certificates git unzip \
         [ "$ii" != "java" ] \
             && alternatives --add-slave java "/opt/jdk-10.0.2/bin/java" "/usr/bin/$ii" "$ii" "/opt/jdk-10.0.2/bin/$ii"; \
     done \
+    && mkdir -p /opt/jdk-10.0.2/lib/security/ \
     && ln -sf /etc/pki/java/cacerts /opt/jdk-10.0.2/lib/security/ \
     && /opt/jdk-10.0.2/bin/java -version
 

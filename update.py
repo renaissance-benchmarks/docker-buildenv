@@ -10,6 +10,12 @@ VERSIONS = [
         "package": "java-1.8.0-openjdk-devel",
     },
     {
+        "name": "openjdk9",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz",
+        "basedir": "jdk-9.0.4",
+    },
+    {
         "name": "openjdk10",
         "maintainer": "horky@d3s.mff.cuni.cz",
         "tarball": "https://download.java.net/java/GA/jdk10/10.0.2/19aef61b38124481863b1413dce1855f/13/openjdk-10.0.2_linux-x64_bin.tar.gz",
@@ -21,10 +27,28 @@ VERSIONS = [
         "package": "java-11-openjdk-devel",
     },
     {
+        "name": "openjdk12",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://download.java.net/java/GA/jdk12.0.2/e482c34c86bd4bf8b56c0b35558996b9/10/GPL/openjdk-12.0.2_linux-x64_bin.tar.gz",
+        "basedir": "jdk-12.0.2",
+    },
+    {
+        "name": "openj9-openjdk8",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u292-b10_openj9-0.26.0/OpenJDK8U-jdk_x64_linux_openj9_8u292b10_openj9-0.26.0.tar.gz",
+        "basedir": "jdk8u292-b10",
+    },
+    {
         "name": "openj9-openjdk11",
         "maintainer": "horky@d3s.mff.cuni.cz",
         "tarball": "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.11%2B9_openj9-0.26.0/OpenJDK11U-jdk_x64_linux_openj9_11.0.11_9_openj9-0.26.0.tar.gz",
         "basedir": "jdk-11.0.11+9",
+    },
+    {
+        "name": "openj9-openjdk16",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://github.com/AdoptOpenJDK/openjdk16-binaries/releases/download/jdk-16.0.1%2B9_openj9-0.26.0/OpenJDK16U-jdk_x64_linux_openj9_16.0.1_9_openj9-0.26.0.tar.gz",
+        "basedir": "jdk-16.0.1+9",
     },
 ]
 
@@ -67,6 +91,7 @@ RUN dnf install -y {common_packages} \\
         [ "$ii" != "java" ] \\
             && alternatives --add-slave java "/opt/{tarball_basedir}/bin/java" "/usr/bin/$ii" "$ii" "/opt/{tarball_basedir}/bin/$ii"; \\
     done \\
+    && mkdir -p /opt/{tarball_basedir}/lib/security/ \\
     && ln -sf /etc/pki/java/cacerts /opt/{tarball_basedir}/lib/security/ \\
     && /opt/{tarball_basedir}/bin/java -version
 

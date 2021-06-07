@@ -14,6 +14,7 @@ RUN dnf install -y ca-certificates git unzip \
         [ "$ii" != "java" ] \
             && alternatives --add-slave java "/opt/jdk-11.0.11+9/bin/java" "/usr/bin/$ii" "$ii" "/opt/jdk-11.0.11+9/bin/$ii"; \
     done \
+    && mkdir -p /opt/jdk-11.0.11+9/lib/security/ \
     && ln -sf /etc/pki/java/cacerts /opt/jdk-11.0.11+9/lib/security/ \
     && /opt/jdk-11.0.11+9/bin/java -version
 
