@@ -10,6 +10,23 @@ VERSIONS = [
         "package": "java-1.8.0-openjdk-devel",
     },
     {
+        "name": "openjdk8-with-ant-gcc",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "package": "java-1.8.0-openjdk-devel",
+        "extra_packages": [
+            "gcc",
+            "bzip2",
+            "which",
+            "jq",
+        ],
+        "commands": [
+            "curl https://downloads.apache.org/ant/binaries/apache-ant-1.10.10-bin.tar.bz2 -o /tmp/apache-ant-1.10.10-bin.tar.bz2",
+            "tar -xjf /tmp/apache-ant-1.10.10-bin.tar.bz2 -C /opt",
+            "rm -f /tmp/apache-ant-1.10.10-bin.tar.bz2",
+            "ln -s /opt/apache-ant-1.10.10/bin/ant /usr/local/bin/ant",
+        ],
+    },
+    {
         "name": "openjdk9",
         "maintainer": "horky@d3s.mff.cuni.cz",
         "tarball": "https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz",
@@ -65,7 +82,7 @@ LABEL maintainer="{maintainer_email}"
 
 RUN dnf install -y {common_packages} \\
     && dnf install -y {package} \\
-    && dnf clean all
+    && dnf clean all{extra_commands}
 
 
 CMD ["/bin/bash"]
@@ -93,7 +110,7 @@ RUN dnf install -y {common_packages} \\
     done \\
     && mkdir -p /opt/{tarball_basedir}/lib/security/ \\
     && ln -sf /etc/pki/java/cacerts /opt/{tarball_basedir}/lib/security/ \\
-    && /opt/{tarball_basedir}/bin/java -version
+    && /opt/{tarball_basedir}/bin/java -version{extra_commands}
 
 
 CMD ["/bin/bash"]
@@ -101,12 +118,19 @@ CMD ["/bin/bash"]
 """
 
 def update_version(dockerfile, config):
-    common_packages = " ".join(COMMON_PACKAGES)
+    packages_to_install = COMMON_PACKAGES[:]
+    packages_to_install.extend(config.get('extra_packages', []))
+    common_packages = " ".join(packages_to_install)
+    extra_commands = "".join(
+        " \\\n    && {}".format(cmd)
+        for cmd in config.get('commands', [])
+    )
     if 'package' in config:
         dockerfile.write(DOCKERFILE_TEMPLATE_FROM_PACKAGE.format(
             common_packages=common_packages,
             maintainer_email=config['maintainer'],
             package=config['package'],
+            extra_commands=extra_commands,
         ))
     else:
         dockerfile.write(DOCKERFILE_TEMPLATE_FROM_TARBALL.format(
@@ -115,6 +139,7 @@ def update_version(dockerfile, config):
             tarball_basename=config['basedir'],
             tarball_basedir=config['basedir'],
             tarball_url=config['tarball'],
+            extra_commands=extra_commands,
         ))
 
 def main():
