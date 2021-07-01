@@ -50,6 +50,18 @@ VERSIONS = [
         "basedir": "jdk-12.0.2",
     },
     {
+        "name": "openjdk13",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_linux-x64_bin.tar.gz",
+        "basedir": "jdk-13.0.2",
+    },
+    {
+        "name": "openjdk14",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://download.java.net/java/GA/jdk14.0.2/205943a0976c4ed48cb16f1043c5c647/12/GPL/openjdk-14.0.2_linux-x64_bin.tar.gz",
+        "basedir": "jdk-14.0.2",
+    },
+    {
         "name": "openj9-openjdk8",
         "maintainer": "horky@d3s.mff.cuni.cz",
         "tarball": "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u292-b10_openj9-0.26.0/OpenJDK8U-jdk_x64_linux_openj9_8u292b10_openj9-0.26.0.tar.gz",
