@@ -68,6 +68,11 @@ VERSIONS = [
         "basedir": "jdk-15.0.2",
     },
     {
+        "name": "openjdk16",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "package": "java-latest-openjdk-devel",
+    },
+    {
         "name": "openj9-openjdk8",
         "maintainer": "horky@d3s.mff.cuni.cz",
         "tarball": "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u292-b10_openj9-0.26.0/OpenJDK8U-jdk_x64_linux_openj9_8u292b10_openj9-0.26.0.tar.gz",
