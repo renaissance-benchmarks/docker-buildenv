@@ -27,7 +27,7 @@ VERSIONS = [
             "ln -s /opt/apache-ant-${ANT_VERSION}/bin/ant /usr/local/bin/ant",
         ],
         "command_vars": {
-            "ANT_VERSION": "1.10.10",
+            "ANT_VERSION": "1.10.12",
         },
     },
     {
