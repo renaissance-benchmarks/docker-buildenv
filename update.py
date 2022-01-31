@@ -105,8 +105,10 @@ COMMON_PACKAGES = [
     "unzip",
 ]
 
+DOCKER_BASE_IMAGE = 'fedora:34'
+
 DOCKERFILE_TEMPLATE_FROM_PACKAGE = '''
-FROM fedora:34
+FROM {base_image}
 MAINTAINER {maintainer_email}
 LABEL maintainer="{maintainer_email}"
 
@@ -123,7 +125,7 @@ CMD ["/bin/bash"]
 # printf 'export JAVA_HOME="%s"\\nexport PATH="$JAVA_HOME/bin:$PATH"\\n' "/opt/{tarball_basedir}" >/etc/profile.d/java_from_opt.sh \\
 
 DOCKERFILE_TEMPLATE_FROM_TARBALL = """
-FROM fedora:34
+FROM {base_image}
 MAINTAINER {maintainer_email}
 LABEL maintainer="{maintainer_email}"
 
@@ -157,6 +159,7 @@ def update_version(dockerfile, config):
     )
     if 'package' in config:
         dockerfile.write(DOCKERFILE_TEMPLATE_FROM_PACKAGE.format(
+            base_image=DOCKER_BASE_IMAGE,
             common_packages=common_packages,
             maintainer_email=config['maintainer'],
             package=config['package'],
@@ -164,6 +167,7 @@ def update_version(dockerfile, config):
         ))
     else:
         dockerfile.write(DOCKERFILE_TEMPLATE_FROM_TARBALL.format(
+            base_image=DOCKER_BASE_IMAGE,
             common_packages=common_packages,
             maintainer_email=config['maintainer'],
             tarball_basename=config['basedir'],
