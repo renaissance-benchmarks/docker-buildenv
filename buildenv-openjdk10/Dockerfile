@@ -1,5 +1,5 @@
 
-FROM fedora:34
+FROM fedora:35
 MAINTAINER horky@d3s.mff.cuni.cz
 LABEL maintainer="horky@d3s.mff.cuni.cz"
 
