@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import re
 import sys
 
 VERSIONS = [
@@ -20,11 +21,14 @@ VERSIONS = [
             "jq",
         ],
         "commands": [
-            "curl https://downloads.apache.org/ant/binaries/apache-ant-1.10.10-bin.tar.bz2 -o /tmp/apache-ant-1.10.10-bin.tar.bz2",
-            "tar -xjf /tmp/apache-ant-1.10.10-bin.tar.bz2 -C /opt",
-            "rm -f /tmp/apache-ant-1.10.10-bin.tar.bz2",
-            "ln -s /opt/apache-ant-1.10.10/bin/ant /usr/local/bin/ant",
+            "curl https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.bz2 -o /tmp/apache-ant-${ANT_VERSION}-bin.tar.bz2",
+            "tar -xjf /tmp/apache-ant-${ANT_VERSION}-bin.tar.bz2 -C /opt",
+            "rm -f /tmp/apache-ant-${ANT_VERSION}-bin.tar.bz2",
+            "ln -s /opt/apache-ant-${ANT_VERSION}/bin/ant /usr/local/bin/ant",
         ],
+        "command_vars": {
+            "ANT_VERSION": "1.10.10",
+        },
     },
     {
         "name": "openjdk9",
@@ -149,12 +153,23 @@ CMD ["/bin/bash"]
 
 """
 
+def replace_shell_pseudo_variables(where, variables):
+    if not variables:
+        return where
+    # https://stackoverflow.com/a/15448887
+    variables_escaped = [
+        '\\$\\{(' + re.escape(name) + ')\\}'
+        for name in sorted(variables, key=len, reverse=True)
+    ]
+    all_variables = re.compile("|".join(variables_escaped), flags=re.DOTALL)
+    return all_variables.sub(lambda x: variables[x.group(1)], where)
+
 def update_version(dockerfile, config):
     packages_to_install = COMMON_PACKAGES[:]
     packages_to_install.extend(config.get('extra_packages', []))
     common_packages = " ".join(packages_to_install)
     extra_commands = "".join(
-        " \\\n    && {}".format(cmd)
+        " \\\n    && {}".format(replace_shell_pseudo_variables(cmd, config.get('command_vars', {})))
         for cmd in config.get('commands', [])
     )
     if 'package' in config:
