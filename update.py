@@ -109,7 +109,7 @@ COMMON_PACKAGES = [
     "unzip",
 ]
 
-DOCKER_BASE_IMAGE = 'fedora:35'
+DOCKER_BASE_IMAGE = 'fedora:34'
 
 DOCKERFILE_TEMPLATE_FROM_PACKAGE = '''
 FROM {base_image}

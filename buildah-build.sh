@@ -14,8 +14,12 @@ banner() {
 my_temp="$( mktemp -d )"
 
 on_exit() {
-    echo ""
+    echo
     cat "$my_temp/report.txt" 2>/dev/null
+    echo
+    echo "To push everything, following command could be useful."
+    echo
+    sed -n 's#.*\(podman push .*\)#\1#p' "$my_temp/report.txt" | paste '-sd#' | sed 's:#: \&\& :g' 2>/dev/null
     echo
     rm -rf "$my_temp"
 }
