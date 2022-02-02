@@ -84,6 +84,18 @@ VERSIONS = [
         "basedir": "jdk-17",
     },
     {
+        "name": "openjdk18-ea",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://download.java.net/java/early_access/jdk18/33/GPL/openjdk-18-ea+33_linux-x64_bin.tar.gz",
+        "basedir": "jdk-18",
+    },
+    {
+        "name": "openjdk19-ea",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://download.java.net/java/early_access/jdk19/7/GPL/openjdk-19-ea+7_linux-x64_bin.tar.gz",
+        "basedir": "jdk-19",
+    },
+    {
         "name": "openj9-openjdk8",
         "maintainer": "horky@d3s.mff.cuni.cz",
         "tarball": "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u292-b10_openj9-0.26.0/OpenJDK8U-jdk_x64_linux_openj9_8u292b10_openj9-0.26.0.tar.gz",
