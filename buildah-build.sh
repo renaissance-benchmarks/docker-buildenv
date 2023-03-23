@@ -29,6 +29,7 @@ trap on_exit INT QUIT TERM EXIT
 echo "To push any of the built images, following commands may be used." >"$my_temp/report.txt"
 echo >>"$my_temp/report.txt"
 
+. ./version.rc
 
 for i in "$@"; do
     if echo "$i" | grep -q '^buildenv-'; then
@@ -38,8 +39,8 @@ for i in "$@"; do
     fi
     dockerfile="buildenv-$version/Dockerfile"
 
-    banner "Will build $version from $dockerfile."
+    banner "Will build $DOCKER_IMAGE_VERSION_TAG-$version from $dockerfile."
 
     buildah bud --iidfile "$my_temp/id-$version.txt" "$dockerfile"
-    echo "$version ==> podman push $( cut -d: -f 2 "$my_temp/id-$version.txt" ) docker://docker.io/renaissancebench/buildenv:$version" >>"$my_temp/report.txt"
+    echo "$version ==> podman push $( cut -d: -f 2 "$my_temp/id-$version.txt" ) docker://docker.io/renaissancebench/buildenv:$DOCKER_IMAGE_VERSION_TAG-$version" >>"$my_temp/report.txt"
 done
