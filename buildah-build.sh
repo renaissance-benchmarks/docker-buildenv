@@ -21,9 +21,16 @@ on_exit() {
     echo
     sed -n 's#.*\(podman push .*\)#\1#p' "$my_temp/report.txt" | paste '-sd#' | sed 's:#: \&\& :g' 2>/dev/null
     echo
+    if ! $exit_okay; then
+        echo
+        echo Something went wrong during image generation.
+        echo Consult the logs above for details.
+        echo
+    fi
     rm -rf "$my_temp"
 }
 
+exit_okay=false
 trap on_exit INT QUIT TERM EXIT
 
 echo "To push any of the built images, following commands may be used." >"$my_temp/report.txt"
@@ -38,9 +45,14 @@ for i in "$@"; do
         version="$i"
     fi
     dockerfile="buildenv-$version/Dockerfile"
+    image_tag="$DOCKER_IMAGE_VERSION_TAG-$version"
+    image_name="docker.io/renaissancebench/buildenv:$image_tag"
 
-    banner "Will build $DOCKER_IMAGE_VERSION_TAG-$version from $dockerfile."
+    banner "Will build $image_tag from $dockerfile."
 
-    buildah bud --iidfile "$my_temp/id-$version.txt" "$dockerfile"
-    echo "$version ==> podman push $( cut -d: -f 2 "$my_temp/id-$version.txt" ) docker://docker.io/renaissancebench/buildenv:$DOCKER_IMAGE_VERSION_TAG-$version" >>"$my_temp/report.txt"
+    buildah bud --iidfile "$my_temp/id-$version.txt" -t "$image_name" "$dockerfile"
+    image_hash="$( cut -d: -f 2 "$my_temp/id-$version.txt" )"
+    echo "$version ==> podman push $image_hash docker://$image_name" >>"$my_temp/report.txt"
 done
+
+exit_okay=true
