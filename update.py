@@ -104,7 +104,7 @@ VERSIONS = [
     {
         "name": "openjdk21-ea",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/java/early_access/jdk21/15/GPL/openjdk-21-ea+15_linux-x64_bin.tar.gz",
+        "tarball": "https://download.java.net/java/GA/jdk21/fd2272bbf8e04c3dbaee13770090416c/35/GPL/openjdk-21_linux-x64_bin.tar.gz",
         "basedir": "jdk-21",
     },
     {

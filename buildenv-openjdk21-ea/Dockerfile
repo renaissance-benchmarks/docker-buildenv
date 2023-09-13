@@ -5,7 +5,7 @@ LABEL maintainer="horky@d3s.mff.cuni.cz"
 
 RUN dnf install -y ca-certificates git unzip \
     && dnf clean all \
-    && curl -L "https://download.java.net/java/early_access/jdk21/15/GPL/openjdk-21-ea+15_linux-x64_bin.tar.gz" -o "/tmp/jdk-21.tar.gz" \
+    && curl -L "https://download.java.net/java/GA/jdk21/fd2272bbf8e04c3dbaee13770090416c/35/GPL/openjdk-21_linux-x64_bin.tar.gz" -o "/tmp/jdk-21.tar.gz" \
     && tar -xz -C /opt -f "/tmp/jdk-21.tar.gz" \
     && rm -f "/tmp/jdk-21.tar.gz" \
     && alternatives --install /usr/bin/java java /opt/jdk-21/bin/java 10 \
