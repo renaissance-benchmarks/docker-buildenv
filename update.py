@@ -127,6 +127,12 @@ VERSIONS = [
         "basedir": "jdk-21.0.1",
     },
     {
+        "name": "openjdk22-ea",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://download.java.net/java/early_access/jdk22/19/GPL/openjdk-22-ea+19_linux-x64_bin.tar.gz",
+        "basedir": "jdk-22",
+    },
+    {
         "name": "openj9-openjdk8",
         "maintainer": "horky@d3s.mff.cuni.cz",
         "tarball": "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u292-b10_openj9-0.26.0/OpenJDK8U-jdk_x64_linux_openj9_8u292b10_openj9-0.26.0.tar.gz",
