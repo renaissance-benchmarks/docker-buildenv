@@ -74,8 +74,8 @@ VERSIONS = [
     {
         "name": "openjdk16",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/java/GA/jdk16.0.1/7147401fd7354114ac51ef3e1328291f/9/GPL/openjdk-16.0.1_linux-x64_bin.tar.gz",
-        "basedir": "jdk-16.0.1",
+        "tarball": "https://download.java.net/java/GA/jdk16.0.2/d4a915d82b4c4fbb9bde534da945d746/7/GPL/openjdk-16.0.2_linux-x64_bin.tar.gz",
+        "basedir": "jdk-16.0.2",
     },
     {
         "name": "openjdk17",
@@ -86,8 +86,8 @@ VERSIONS = [
     {
         "name": "openjdk18",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/java/GA/jdk18.0.1.1/65ae32619e2f40f3a9af3af1851d6e19/2/GPL/openjdk-18.0.1.1_linux-x64_bin.tar.gz",
-        "basedir": "jdk-18.0.1.1",
+        "tarball": "https://download.java.net/java/GA/jdk18.0.2/f6ad4b4450fd4d298113270ec84f30ee/9/GPL/openjdk-18.0.2_linux-x64_bin.tar.gz",
+        "basedir": "jdk-18.0.2",
     },
     {
         "name": "openjdk19",
@@ -98,8 +98,8 @@ VERSIONS = [
     {
         "name": "openjdk20",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/java/GA/jdk20/bdc68b4b9cbc4ebcb30745c85038d91d/36/GPL/openjdk-20_linux-x64_bin.tar.gz",
-        "basedir": "jdk-20",
+        "tarball": "https://download.java.net/java/GA/jdk20.0.2/6e380f22cbe7469fa75fb448bd903d8e/9/GPL/openjdk-20.0.2_linux-x64_bin.tar.gz",
+        "basedir": "jdk-20.0.2",
     },
     {
         "name": "openjdk21-ea",
