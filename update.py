@@ -121,10 +121,10 @@ VERSIONS = [
         "basedir": "jdk-20.0.2",
     },
     {
-        "name": "openjdk21-ea",
+        "name": "openjdk21",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/java/GA/jdk21/fd2272bbf8e04c3dbaee13770090416c/35/GPL/openjdk-21_linux-x64_bin.tar.gz",
-        "basedir": "jdk-21",
+        "tarball": "https://download.java.net/java/GA/jdk21.0.1/415e3f918a1f4062a0074a2794853d0d/12/GPL/openjdk-21.0.1_linux-x64_bin.tar.gz",
+        "basedir": "jdk-21.0.1",
     },
     {
         "name": "openj9-openjdk8",
