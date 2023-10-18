@@ -48,6 +48,26 @@ VERSIONS = [
         "package": "java-11-openjdk-devel",
     },
     {
+        "name": "openjdk11-with-ant-gcc",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "package": "java-11-openjdk-devel",
+        "extra_packages": [
+            "gcc",
+            "bzip2",
+            "which",
+            "jq",
+        ],
+        "commands": [
+            "curl https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.bz2 -o /tmp/apache-ant-${ANT_VERSION}-bin.tar.bz2",
+            "tar -xjf /tmp/apache-ant-${ANT_VERSION}-bin.tar.bz2 -C /opt",
+            "rm -f /tmp/apache-ant-${ANT_VERSION}-bin.tar.bz2",
+            "ln -s /opt/apache-ant-${ANT_VERSION}/bin/ant /usr/local/bin/ant",
+        ],
+        "command_vars": {
+            "ANT_VERSION": "1.10.14",
+        },
+    },
+    {
         "name": "openjdk12",
         "maintainer": "horky@d3s.mff.cuni.cz",
         "tarball": "https://download.java.net/java/GA/jdk12.0.2/e482c34c86bd4bf8b56c0b35558996b9/10/GPL/openjdk-12.0.2_linux-x64_bin.tar.gz",
