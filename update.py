@@ -145,12 +145,6 @@ VERSIONS = [
         "basedir": "jdk-11.0.11+9",
     },
     {
-        "name": "openj9-openjdk16",
-        "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://github.com/AdoptOpenJDK/openjdk16-binaries/releases/download/jdk-16.0.1%2B9_openj9-0.26.0/OpenJDK16U-jdk_x64_linux_openj9_16.0.1_9_openj9-0.26.0.tar.gz",
-        "basedir": "jdk-16.0.1+9",
-    },
-    {
         "name": "openj9-openjdk17",
         "maintainer": "horky@d3s.mff.cuni.cz",
         "tarball": "https://github.com/AdoptOpenJDK/openjdk17-binaries/releases/download/jdk-2021-05-07-13-31/OpenJDK-jdk_x64_linux_openj9_2021-05-06-23-30.tar.gz",
