@@ -135,20 +135,20 @@ VERSIONS = [
     {
         "name": "openj9-openjdk8",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u292-b10_openj9-0.26.0/OpenJDK8U-jdk_x64_linux_openj9_8u292b10_openj9-0.26.0.tar.gz",
-        "basedir": "jdk8u292-b10",
+        "tarball": "https://github.com/ibmruntimes/semeru8-binaries/releases/download/jdk8u382-b05_openj9-0.40.0/ibm-semeru-open-jdk_x64_linux_8u382b05_openj9-0.40.0.tar.gz",
+        "basedir": "jdk8u382-b05",
     },
     {
         "name": "openj9-openjdk11",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.11%2B9_openj9-0.26.0/OpenJDK11U-jdk_x64_linux_openj9_11.0.11_9_openj9-0.26.0.tar.gz",
-        "basedir": "jdk-11.0.11+9",
+        "tarball": "https://github.com/ibmruntimes/semeru11-binaries/releases/download/jdk-11.0.20.1%2B1_openj9-0.40.0/ibm-semeru-open-jdk_x64_linux_11.0.20.1_1_openj9-0.40.0.tar.gz",
+        "basedir": "jdk-11.0.20.1+1",
     },
     {
         "name": "openj9-openjdk17",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://github.com/AdoptOpenJDK/openjdk17-binaries/releases/download/jdk-2021-05-07-13-31/OpenJDK-jdk_x64_linux_openj9_2021-05-06-23-30.tar.gz",
-        "basedir": "jdk-17+18",
+        "tarball": "https://github.com/ibmruntimes/semeru17-binaries/releases/download/jdk-17.0.8.1%2B1_openj9-0.40.0/ibm-semeru-open-jdk_x64_linux_17.0.8.1_1_openj9-0.40.0.tar.gz",
+        "basedir": "jdk-17.0.8.1+1",
     },
 ]
 
