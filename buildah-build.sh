@@ -36,7 +36,7 @@ trap on_exit INT QUIT TERM EXIT
 echo "To push any of the built images, following commands may be used." >"$my_temp/report.txt"
 echo >>"$my_temp/report.txt"
 
-. ./version.rc
+source ./version.rc
 
 for i in "$@"; do
     if echo "$i" | grep -q '^buildenv-'; then
@@ -45,8 +45,8 @@ for i in "$@"; do
         version="$i"
     fi
     dockerfile="buildenv-$version/Dockerfile"
-    image_tag="$DOCKER_IMAGE_VERSION_TAG-$version"
-    image_name="docker.io/renaissancebench/buildenv:$image_tag"
+    image_tag="${DOCKER_IMAGE_VERSION_TAG}-${version}"
+    image_name="${DOCKER_REGISTRY}/${DOCKER_REGISTRY_NAMESPACE}/${DOCKER_IMAGE_NAME}:$image_tag"
 
     banner "Will build $image_tag from $dockerfile."
 
