@@ -1,23 +1,16 @@
 
-FROM fedora:37
+FROM fedora:39
 MAINTAINER horky@d3s.mff.cuni.cz
 LABEL maintainer="horky@d3s.mff.cuni.cz"
+LABEL name=renaissance-buildenv
+LABEL version=v8-openjdk21
+LABEL vendor=renaissance.dev
 
-RUN dnf install -y ca-certificates git unzip \
-    && dnf clean all \
-    && curl -L "https://download.java.net/java/GA/jdk21.0.1/415e3f918a1f4062a0074a2794853d0d/12/GPL/openjdk-21.0.1_linux-x64_bin.tar.gz" -o "/tmp/jdk-21.0.1.tar.gz" \
-    && tar -xz -C /opt -f "/tmp/jdk-21.0.1.tar.gz" \
-    && rm -f "/tmp/jdk-21.0.1.tar.gz" \
-    && alternatives --install /usr/bin/java java /opt/jdk-21.0.1/bin/java 10 \
-    && for i in /opt/jdk-21.0.1/bin/*; do \
-        ii="$( basename "$i" )"; \
-        [ "$ii" != "java" ] \
-            && alternatives --add-slave java "/opt/jdk-21.0.1/bin/java" "/usr/bin/$ii" "$ii" "/opt/jdk-21.0.1/bin/$ii"; \
-    done \
-    && mkdir -p /opt/jdk-21.0.1/lib/security/ \
-    && ln -sf /etc/pki/java/cacerts /opt/jdk-21.0.1/lib/security/ \
-    && /opt/jdk-21.0.1/bin/java -version
+RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install ca-certificates git unzip \
+    && dnf -y --setopt install_weak_deps=false --repo fedora --repo updates update
 
+RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install java-21-openjdk-devel \
+    && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \
+    && rpm --rebuilddb
 
 CMD ["/bin/bash"]
-

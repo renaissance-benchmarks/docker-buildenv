@@ -1,13 +1,16 @@
 
-FROM fedora:37
+FROM fedora:39
 MAINTAINER horky@d3s.mff.cuni.cz
 LABEL maintainer="horky@d3s.mff.cuni.cz"
+LABEL name=renaissance-buildenv
+LABEL version=v8-openjdk9
+LABEL vendor=renaissance.dev
 
-RUN dnf install -y ca-certificates git unzip \
-    && dnf clean all \
-    && curl -L "https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz" -o "/tmp/jdk-9.0.4.tar.gz" \
-    && tar -xz -C /opt -f "/tmp/jdk-9.0.4.tar.gz" \
-    && rm -f "/tmp/jdk-9.0.4.tar.gz" \
+RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install ca-certificates git unzip \
+    && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \
+    && rpm --rebuilddb
+
+RUN curl -L "https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz" | tar -xz -C /opt \
     && alternatives --install /usr/bin/java java /opt/jdk-9.0.4/bin/java 10 \
     && for i in /opt/jdk-9.0.4/bin/*; do \
         ii="$( basename "$i" )"; \
@@ -18,6 +21,4 @@ RUN dnf install -y ca-certificates git unzip \
     && ln -sf /etc/pki/java/cacerts /opt/jdk-9.0.4/lib/security/ \
     && /opt/jdk-9.0.4/bin/java -version
 
-
 CMD ["/bin/bash"]
-

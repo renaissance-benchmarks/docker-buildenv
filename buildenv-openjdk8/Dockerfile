@@ -1,12 +1,16 @@
 
-FROM fedora:37
+FROM fedora:39
 MAINTAINER horky@d3s.mff.cuni.cz
 LABEL maintainer="horky@d3s.mff.cuni.cz"
+LABEL name=renaissance-buildenv
+LABEL version=v8-openjdk8
+LABEL vendor=renaissance.dev
 
-RUN dnf install -y ca-certificates git unzip \
-    && dnf install -y java-1.8.0-openjdk-devel \
-    && dnf clean all
+RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install ca-certificates git unzip \
+    && dnf -y --setopt install_weak_deps=false --repo fedora --repo updates update
 
+RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install java-1.8.0-openjdk-devel \
+    && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \
+    && rpm --rebuilddb
 
 CMD ["/bin/bash"]
-
