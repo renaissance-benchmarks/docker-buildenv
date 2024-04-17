@@ -169,35 +169,42 @@ COMMON_PACKAGES = [
     "unzip",
 ]
 
-DOCKER_BASE_IMAGE = 'fedora:37'
+DOCKER_CONFIG = "version.rc"
 
 DOCKERFILE_TEMPLATE_FROM_PACKAGE = '''
 FROM {base_image}
 MAINTAINER {maintainer_email}
 LABEL maintainer="{maintainer_email}"
+LABEL name={image_name}
+LABEL version={image_version}-{image_variant}
+LABEL vendor=renaissance.dev
 
-RUN dnf install -y {common_packages} \\
-    && dnf install -y {package} \\
-    && dnf clean all{extra_commands}
+RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install {install_packages} \\
+    && dnf -y --setopt install_weak_deps=false --repo fedora --repo updates update
 
+RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install {package} \\
+    && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \\
+    && rpm --rebuilddb{extra_commands}
 
 CMD ["/bin/bash"]
-
 '''
 
-# Following is not needed as we install Java via alternatives
+# The following is not needed because we install Java via alternatives:
 # printf 'export JAVA_HOME="%s"\\nexport PATH="$JAVA_HOME/bin:$PATH"\\n' "/opt/{tarball_basedir}" >/etc/profile.d/java_from_opt.sh \\
 
-DOCKERFILE_TEMPLATE_FROM_TARBALL = """
+DOCKERFILE_TEMPLATE_FROM_TARBALL = '''
 FROM {base_image}
 MAINTAINER {maintainer_email}
 LABEL maintainer="{maintainer_email}"
+LABEL name={image_name}
+LABEL version={image_version}-{image_variant}
+LABEL vendor=renaissance.dev
 
-RUN dnf install -y {common_packages} \\
-    && dnf clean all \\
-    && curl -L "{tarball_url}" -o "/tmp/{tarball_basename}.tar.gz" \\
-    && tar -xz -C /opt -f "/tmp/{tarball_basename}.tar.gz" \\
-    && rm -f "/tmp/{tarball_basename}.tar.gz" \\
+RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install {install_packages} \\
+    && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \\
+    && rpm --rebuilddb
+
+RUN curl -L "{tarball_url}" | tar -xz -C /opt \\
     && alternatives --install /usr/bin/java java /opt/{tarball_basedir}/bin/java 10 \\
     && for i in /opt/{tarball_basedir}/bin/*; do \\
         ii="$( basename "$i" )"; \\
@@ -208,10 +215,9 @@ RUN dnf install -y {common_packages} \\
     && ln -sf /etc/pki/java/cacerts /opt/{tarball_basedir}/lib/security/ \\
     && /opt/{tarball_basedir}/bin/java -version{extra_commands}
 
-
 CMD ["/bin/bash"]
+'''
 
-"""
 
 def replace_shell_pseudo_variables(where, variables):
     if not variables:
@@ -224,43 +230,60 @@ def replace_shell_pseudo_variables(where, variables):
     all_variables = re.compile("|".join(variables_escaped), flags=re.DOTALL)
     return all_variables.sub(lambda x: variables[x.group(1)], where)
 
-def update_version(dockerfile, config):
-    packages_to_install = COMMON_PACKAGES[:]
-    packages_to_install.extend(config.get('extra_packages', []))
-    common_packages = " ".join(packages_to_install)
+
+def update_version(dockerfile, config: dict, docker_config: dict):
+    install_packages = " ".join(COMMON_PACKAGES + config.get('extra_packages', []))
     extra_commands = "".join(
         " \\\n    && {}".format(replace_shell_pseudo_variables(cmd, config.get('command_vars', {})))
         for cmd in config.get('commands', [])
     )
+
+    dockerfile_vars = dict(
+        base_image=docker_config['DOCKER_BASE_IMAGE'],
+        image_name=docker_config['DOCKER_IMAGE_NAME'],
+        image_variant=config['name'],
+        image_version=docker_config['DOCKER_IMAGE_VERSION_TAG'],
+        install_packages=install_packages,
+        maintainer_email=config['maintainer'],
+        extra_commands=extra_commands,
+    )
+
     if 'package' in config:
-        dockerfile.write(DOCKERFILE_TEMPLATE_FROM_PACKAGE.format(
-            base_image=DOCKER_BASE_IMAGE,
-            common_packages=common_packages,
-            maintainer_email=config['maintainer'],
+        dockerfile_content = DOCKERFILE_TEMPLATE_FROM_PACKAGE.format(
             package=config['package'],
-            extra_commands=extra_commands,
-        ))
+            **dockerfile_vars
+        )
     else:
-        dockerfile.write(DOCKERFILE_TEMPLATE_FROM_TARBALL.format(
-            base_image=DOCKER_BASE_IMAGE,
-            common_packages=common_packages,
-            maintainer_email=config['maintainer'],
+        dockerfile_content = DOCKERFILE_TEMPLATE_FROM_TARBALL.format(
             tarball_basename=config['basedir'],
             tarball_basedir=config['basedir'],
             tarball_url=config['tarball'],
-            extra_commands=extra_commands,
-        ))
+            **dockerfile_vars
+        )
+
+    dockerfile.write(dockerfile_content)
+
+
+def load_config(filename: str):
+    with open(filename) as f:
+        lines = [line.strip() for line in f.readlines()]
+        pairs = [line.split("=", maxsplit=2) for line in lines]
+        return dict(pairs)
+
 
 def main():
-    for ver in VERSIONS:
-        base_dir = "buildenv-" + ver['name']
+    docker_config = load_config(DOCKER_CONFIG)
+
+    for version_config in VERSIONS:
+        base_dir = "buildenv-{name}".format(**version_config)
         try:
             os.mkdir(base_dir, mode = 0o777)
         except FileExistsError:
             pass
         with open(os.path.join(base_dir, 'Dockerfile'), 'w') as f:
-            print("Updating {} ...".format(ver['name']), file=sys.stderr)
-            update_version(f, ver)
+            print("Updating {name} ...".format(**version_config), file=sys.stderr)
+            update_version(f, version_config, docker_config)
+
 
 if __name__ == '__main__':
     main()
