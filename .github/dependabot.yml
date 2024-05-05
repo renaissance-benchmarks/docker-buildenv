@@ -1,0 +1,91 @@
+version: 2
+updates:
+# Waiting for multiple directories since 2019... ¯\_(ツ)_/¯ https://github.com/dependabot/dependabot-core/issues/2178
+- package-ecosystem: "docker"
+  directory: "/buildenv-openj9-openjdk8"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openj9-openjdk11"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openj9-openjdk17"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openj9-openjdk21"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk8"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk8-with-ant-gcc"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk9"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk10"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk11"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk11-with-ant-gcc"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk12"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk13"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk14"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk15"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk16"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk17"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk18"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk19"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk20"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk21"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk22"
+  schedule:
+      interval: "daily"
+- package-ecosystem: "docker"
+  directory: "/buildenv-openjdk23-ea"
+  schedule:
+      interval: "daily"

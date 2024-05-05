@@ -1,6 +1,6 @@
 
-FROM fedora:39
-MAINTAINER horky@d3s.mff.cuni.cz
+FROM fedora:40
+LABEL org.opencontainers.image.authors="horky@d3s.mff.cuni.cz"
 LABEL maintainer="horky@d3s.mff.cuni.cz"
 LABEL name=renaissance-buildenv
 LABEL version=v8-openjdk12

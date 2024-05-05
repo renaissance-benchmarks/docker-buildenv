@@ -21,10 +21,9 @@ VERSIONS = [
             "jq",
         ],
         "commands": [
-            "curl https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.bz2 -o /tmp/apache-ant-${ANT_VERSION}-bin.tar.bz2",
-            "tar -xjf /tmp/apache-ant-${ANT_VERSION}-bin.tar.bz2 -C /opt",
-            "rm -f /tmp/apache-ant-${ANT_VERSION}-bin.tar.bz2",
-            "ln -s /opt/apache-ant-${ANT_VERSION}/bin/ant /usr/local/bin/ant",
+            "curl https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.bz2\
+             | tar xjf - --strip-components=1 --one-top-level=/opt/ant",
+            "ln -s /opt/ant/bin/ant /usr/local/bin/ant",
         ],
         "command_vars": {
             "ANT_VERSION": "1.10.14",
@@ -58,10 +57,9 @@ VERSIONS = [
             "jq",
         ],
         "commands": [
-            "curl https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.bz2 -o /tmp/apache-ant-${ANT_VERSION}-bin.tar.bz2",
-            "tar -xjf /tmp/apache-ant-${ANT_VERSION}-bin.tar.bz2 -C /opt",
-            "rm -f /tmp/apache-ant-${ANT_VERSION}-bin.tar.bz2",
-            "ln -s /opt/apache-ant-${ANT_VERSION}/bin/ant /usr/local/bin/ant",
+            "curl https://downloads.apache.org/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.bz2\
+            | tar xjf - --strip-components=1 --one-top-level=/opt/ant",
+            "ln -s /opt/ant/bin/ant /usr/local/bin/ant",
         ],
         "command_vars": {
             "ANT_VERSION": "1.10.14",
@@ -134,7 +132,7 @@ VERSIONS = [
     {
         "name": "openjdk23-ea",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/java/early_access/jdk23/18/GPL/openjdk-23-ea+18_linux-x64_bin.tar.gz",
+        "tarball": "https://download.java.net/java/early_access/jdk23/21/GPL/openjdk-23-ea+21_linux-x64_bin.tar.gz",
         "basedir": "jdk-23",
     },
     {
@@ -173,7 +171,7 @@ DOCKER_CONFIG = "version.rc"
 
 DOCKERFILE_TEMPLATE_FROM_PACKAGE = '''
 FROM {base_image}
-MAINTAINER {maintainer_email}
+LABEL org.opencontainers.image.authors="{maintainer_email}"
 LABEL maintainer="{maintainer_email}"
 LABEL name={image_name}
 LABEL version={image_version}-{image_variant}
@@ -194,7 +192,7 @@ CMD ["/bin/bash"]
 
 DOCKERFILE_TEMPLATE_FROM_TARBALL = '''
 FROM {base_image}
-MAINTAINER {maintainer_email}
+LABEL org.opencontainers.image.authors="{maintainer_email}"
 LABEL maintainer="{maintainer_email}"
 LABEL name={image_name}
 LABEL version={image_version}-{image_variant}
@@ -248,27 +246,23 @@ def update_version(dockerfile, config: dict, docker_config: dict):
         extra_commands=extra_commands,
     )
 
-    if 'package' in config:
-        dockerfile_content = DOCKERFILE_TEMPLATE_FROM_PACKAGE.format(
-            package=config['package'],
-            **dockerfile_vars
-        )
-    else:
-        dockerfile_content = DOCKERFILE_TEMPLATE_FROM_TARBALL.format(
-            tarball_basename=config['basedir'],
-            tarball_basedir=config['basedir'],
-            tarball_url=config['tarball'],
-            **dockerfile_vars
-        )
+    format_args = dict(
+        f=DOCKERFILE_TEMPLATE_FROM_PACKAGE,
+        package=config['package'],
+    ) if 'package' in config else dict(
+        f=DOCKERFILE_TEMPLATE_FROM_TARBALL,
+        tarball_basename=config['basedir'],
+        tarball_basedir=config['basedir'],
+        tarball_url=config['tarball'],
+    )
 
+    dockerfile_content = format_args.pop('f').format(**format_args, **dockerfile_vars)
     dockerfile.write(dockerfile_content)
 
 
 def load_config(filename: str):
     with open(filename) as f:
-        lines = [line.strip() for line in f.readlines()]
-        pairs = [line.split("=", maxsplit=2) for line in lines]
-        return dict(pairs)
+        return dict([line.strip().split("=", maxsplit=2) for line in f.readlines()])
 
 
 def main():
@@ -276,10 +270,7 @@ def main():
 
     for version_config in VERSIONS:
         base_dir = "buildenv-{name}".format(**version_config)
-        try:
-            os.mkdir(base_dir, mode = 0o777)
-        except FileExistsError:
-            pass
+        os.makedirs(base_dir, mode=0o777, exist_ok=True)
         with open(os.path.join(base_dir, 'Dockerfile'), 'w') as f:
             print("Updating {name} ...".format(**version_config), file=sys.stderr)
             update_version(f, version_config, docker_config)
