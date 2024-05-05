@@ -1,6 +1,6 @@
 
-FROM fedora:39
-MAINTAINER horky@d3s.mff.cuni.cz
+FROM fedora:40
+LABEL org.opencontainers.image.authors="horky@d3s.mff.cuni.cz"
 LABEL maintainer="horky@d3s.mff.cuni.cz"
 LABEL name=renaissance-buildenv
 LABEL version=v8-openjdk11-with-ant-gcc
@@ -12,9 +12,8 @@ RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install java-11-openjdk-devel \
     && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \
     && rpm --rebuilddb \
-    && curl https://downloads.apache.org/ant/binaries/apache-ant-1.10.14-bin.tar.bz2 -o /tmp/apache-ant-1.10.14-bin.tar.bz2 \
-    && tar -xjf /tmp/apache-ant-1.10.14-bin.tar.bz2 -C /opt \
-    && rm -f /tmp/apache-ant-1.10.14-bin.tar.bz2 \
-    && ln -s /opt/apache-ant-1.10.14/bin/ant /usr/local/bin/ant
+    && curl https://downloads.apache.org/ant/binaries/apache-ant-1.10.14-bin.tar.bz2 \
+    | tar xjf - --strip-components=1 --one-top-level=/opt/ant \
+    && ln -s /opt/ant/bin/ant /usr/local/bin/ant
 
 CMD ["/bin/bash"]

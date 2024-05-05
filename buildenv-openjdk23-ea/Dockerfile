@@ -1,6 +1,6 @@
 
-FROM fedora:39
-MAINTAINER horky@d3s.mff.cuni.cz
+FROM fedora:40
+LABEL org.opencontainers.image.authors="horky@d3s.mff.cuni.cz"
 LABEL maintainer="horky@d3s.mff.cuni.cz"
 LABEL name=renaissance-buildenv
 LABEL version=v8-openjdk23-ea
@@ -10,7 +10,7 @@ RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install
     && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \
     && rpm --rebuilddb
 
-RUN curl -L "https://download.java.net/java/early_access/jdk23/18/GPL/openjdk-23-ea+18_linux-x64_bin.tar.gz" | tar -xz -C /opt \
+RUN curl -L "https://download.java.net/java/early_access/jdk23/21/GPL/openjdk-23-ea+21_linux-x64_bin.tar.gz" | tar -xz -C /opt \
     && alternatives --install /usr/bin/java java /opt/jdk-23/bin/java 10 \
     && for i in /opt/jdk-23/bin/*; do \
         ii="$( basename "$i" )"; \
