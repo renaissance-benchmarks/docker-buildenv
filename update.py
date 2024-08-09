@@ -241,6 +241,22 @@ GITHUB_WORKFLOW_TEMPLATE = '''
 
 '''
 
+GITHUB_DEPENDABOT_FILENAME = '.github/dependabot.yml'
+GITHUB_DEPENDABOT_HEADER = '''
+version: 2
+
+# Multiple directories not working properly
+# See https://github.com/dependabot/dependabot-core/issues/2178
+
+updates:
+'''
+GITHUB_DEPENDABOT_TEMPLATE = '''
+  - package-ecosystem: docker
+    directory: /buildenv-{name}
+    schedule:
+      interval: weekly
+'''
+
 
 def replace_shell_pseudo_variables(where, variables):
     if not variables:
@@ -311,6 +327,11 @@ def main():
         print(GITHUB_WORKFLOW_HEADER, file=f)
         for version_config in VERSIONS:
             print(GITHUB_WORKFLOW_TEMPLATE.format(**version_config), file=f)
+
+    with open(GITHUB_DEPENDABOT_FILENAME, 'w') as f:
+        print(GITHUB_DEPENDABOT_HEADER, file=f)
+        for version_config in VERSIONS:
+            print(GITHUB_DEPENDABOT_TEMPLATE.format(**version_config), file=f)
 
 if __name__ == '__main__':
     main()
