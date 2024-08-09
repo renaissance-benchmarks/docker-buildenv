@@ -3,7 +3,7 @@ FROM fedora:39
 MAINTAINER horky@d3s.mff.cuni.cz
 LABEL maintainer="horky@d3s.mff.cuni.cz"
 LABEL name=renaissance-buildenv
-LABEL version=v8-openjdk9
+LABEL version=v9-openjdk9
 LABEL vendor=renaissance.dev
 
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install ca-certificates git unzip \
