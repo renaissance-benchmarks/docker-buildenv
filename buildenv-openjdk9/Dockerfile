@@ -5,7 +5,7 @@ FROM fedora:39
 LABEL org.opencontainers.image.authors="horky@d3s.mff.cuni.cz"
 LABEL maintainer="horky@d3s.mff.cuni.cz"
 LABEL name=renaissance-buildenv
-LABEL version=v9-openjdk9
+LABEL version=v10-openjdk9
 LABEL vendor=renaissance.dev
 LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant openjdk9)"
 
