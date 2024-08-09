@@ -1,10 +1,13 @@
 
+# WARNING: generated file, use update.py for updates
+
 FROM fedora:39
-MAINTAINER horky@d3s.mff.cuni.cz
+LABEL org.opencontainers.image.authors="horky@d3s.mff.cuni.cz"
 LABEL maintainer="horky@d3s.mff.cuni.cz"
 LABEL name=renaissance-buildenv
 LABEL version=v9-openjdk11-with-ant-gcc
 LABEL vendor=renaissance.dev
+LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant openjdk11-with-ant-gcc)"
 
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install ca-certificates git unzip gcc bzip2 which jq \
     && dnf -y --setopt install_weak_deps=false --repo fedora --repo updates update

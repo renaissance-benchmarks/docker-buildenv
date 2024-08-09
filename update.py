@@ -172,12 +172,15 @@ COMMON_PACKAGES = [
 DOCKER_CONFIG = "version.rc"
 
 DOCKERFILE_TEMPLATE_FROM_PACKAGE = '''
+# WARNING: generated file, use update.py for updates
+
 FROM {base_image}
-MAINTAINER {maintainer_email}
+LABEL org.opencontainers.image.authors="{maintainer_email}"
 LABEL maintainer="{maintainer_email}"
 LABEL name={image_name}
 LABEL version={image_version}-{image_variant}
 LABEL vendor=renaissance.dev
+LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant {image_variant})"
 
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install {install_packages} \\
     && dnf -y --setopt install_weak_deps=false --repo fedora --repo updates update
@@ -193,12 +196,15 @@ CMD ["/bin/bash"]
 # printf 'export JAVA_HOME="%s"\\nexport PATH="$JAVA_HOME/bin:$PATH"\\n' "/opt/{tarball_basedir}" >/etc/profile.d/java_from_opt.sh \\
 
 DOCKERFILE_TEMPLATE_FROM_TARBALL = '''
+# WARNING: generated file, use update.py for updates
+
 FROM {base_image}
-MAINTAINER {maintainer_email}
+LABEL org.opencontainers.image.authors="{maintainer_email}"
 LABEL maintainer="{maintainer_email}"
 LABEL name={image_name}
 LABEL version={image_version}-{image_variant}
 LABEL vendor=renaissance.dev
+LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant {image_variant})"
 
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install {install_packages} \\
     && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \\
