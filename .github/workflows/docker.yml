@@ -1,0 +1,273 @@
+
+name: Docker images
+
+# WARNING: generated file, use update.py for updates
+
+on: [push, pull_request]
+
+jobs:
+
+
+  image-openjdk8:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk8
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk8-with-ant-gcc:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk8-with-ant-gcc
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk9:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk9
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk10:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk10
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk11:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk11
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk11-with-ant-gcc:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk11-with-ant-gcc
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk12:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk12
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk13:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk13
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk14:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk14
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk15:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk15
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk16:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk16
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk17:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk17
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk18:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk18
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk19:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk19
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk20:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk20
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk21:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk21
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk22:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk22
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk23-ea:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk23-ea
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openj9-openjdk8:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openj9-openjdk8
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openj9-openjdk11:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openj9-openjdk11
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openj9-openjdk17:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openj9-openjdk17
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openj9-openjdk21:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openj9-openjdk21
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+

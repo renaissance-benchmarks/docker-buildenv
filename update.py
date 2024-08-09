@@ -218,6 +218,29 @@ RUN curl -L "{tarball_url}" | tar -xz -C /opt \\
 CMD ["/bin/bash"]
 '''
 
+GITHUB_WORKFLOW_FILENAME = '.github/workflows/docker.yml'
+GITHUB_WORKFLOW_HEADER = '''
+name: Docker images
+
+# WARNING: generated file, use update.py for updates
+
+on: [push, pull_request]
+
+jobs:
+'''
+GITHUB_WORKFLOW_TEMPLATE = '''
+  image-{name}:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: {name}
+      push: ${{{{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}}}
+
+'''
+
 
 def replace_shell_pseudo_variables(where, variables):
     if not variables:
@@ -284,6 +307,10 @@ def main():
             print("Updating {name} ...".format(**version_config), file=sys.stderr)
             update_version(f, version_config, docker_config)
 
+    with open(GITHUB_WORKFLOW_FILENAME, 'w') as f:
+        print(GITHUB_WORKFLOW_HEADER, file=f)
+        for version_config in VERSIONS:
+            print(GITHUB_WORKFLOW_TEMPLATE.format(**version_config), file=f)
 
 if __name__ == '__main__':
     main()
