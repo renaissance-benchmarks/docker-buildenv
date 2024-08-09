@@ -1,0 +1,20 @@
+name: Check tag synchronization
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Load configuration and versions
+        run: cat version.rc >> "$GITHUB_ENV"
+
+      - name: Check tag name corresponds to DOCKER_IMAGE_VERSION_TAG
+        shell: bash
+        run: test "refs/tags/$DOCKER_IMAGE_VERSION_TAG" = "${{ github.ref }}"

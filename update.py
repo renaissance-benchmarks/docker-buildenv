@@ -237,7 +237,7 @@ GITHUB_WORKFLOW_TEMPLATE = '''
     uses: ./.github/workflows/lib-build-image.yml
     with:
       name: {name}
-      push: ${{{{ github.ref == 'refs/heads/master' }}}}
+      push: ${{{{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}}}
 
 '''
 
