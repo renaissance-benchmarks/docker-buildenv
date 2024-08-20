@@ -50,7 +50,7 @@ for i in "$@"; do
 
     banner "Will build $image_tag from $dockerfile."
 
-    buildah bud --iidfile "$my_temp/id-$version.txt" -t "$image_name" "$dockerfile"
+    buildah bud --iidfile "$my_temp/id-$version.txt" -t "localhost/$image_name" "$dockerfile"
     image_hash="$( cut -d: -f 2 "$my_temp/id-$version.txt" )"
     echo "$version ==> podman push $image_hash docker://$image_name" >>"$my_temp/report.txt"
 done
