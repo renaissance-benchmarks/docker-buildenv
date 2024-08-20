@@ -10,8 +10,7 @@ LABEL vendor=renaissance.dev
 LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant openjdk14)"
 
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install ca-certificates git unzip \
-    && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \
-    && rpm --rebuilddb
+    && dnf clean all && rm -rf /var/log/*
 
 RUN curl -L "https://download.java.net/java/GA/jdk14.0.2/205943a0976c4ed48cb16f1043c5c647/12/GPL/openjdk-14.0.2_linux-x64_bin.tar.gz" | tar -xz -C /opt \
     && alternatives --install /usr/bin/java java /opt/jdk-14.0.2/bin/java 10 \

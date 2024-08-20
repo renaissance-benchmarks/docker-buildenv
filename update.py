@@ -172,7 +172,11 @@ COMMON_PACKAGES = [
 DOCKER_CONFIG = "version.rc"
 
 DOCKERFILE_COMMON = {
-    'final_cleanup_commands': 'rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \\\n    && rpm --rebuilddb',
+    # Do not use:
+    #   rm -rf /var/lib/dnf/* /var/cache/dnf/* && rpm --rebuilddb
+    # as it fails on overlayfs due to unhandled rename exception:
+    #   https://github.com/rpm-software-management/rpm/issues/2355
+    'final_cleanup_commands': 'dnf clean all && rm -rf /var/log/*',
 }
 
 DOCKERFILE_TEMPLATE_FROM_PACKAGE = '''

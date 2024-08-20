@@ -10,8 +10,7 @@ LABEL vendor=renaissance.dev
 LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant openjdk12)"
 
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install ca-certificates git unzip \
-    && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \
-    && rpm --rebuilddb
+    && dnf clean all && rm -rf /var/log/*
 
 RUN curl -L "https://download.java.net/java/GA/jdk12.0.2/e482c34c86bd4bf8b56c0b35558996b9/10/GPL/openjdk-12.0.2_linux-x64_bin.tar.gz" | tar -xz -C /opt \
     && alternatives --install /usr/bin/java java /opt/jdk-12.0.2/bin/java 10 \

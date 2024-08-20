@@ -10,8 +10,7 @@ LABEL vendor=renaissance.dev
 LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant openjdk23-ea)"
 
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install ca-certificates git unzip \
-    && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \
-    && rpm --rebuilddb
+    && dnf clean all && rm -rf /var/log/*
 
 RUN curl -L "https://download.java.net/java/early_access/jdk23/18/GPL/openjdk-23-ea+18_linux-x64_bin.tar.gz" | tar -xz -C /opt \
     && alternatives --install /usr/bin/java java /opt/jdk-23/bin/java 10 \

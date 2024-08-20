@@ -13,8 +13,7 @@ RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install
     && dnf -y --setopt install_weak_deps=false --repo fedora --repo updates update
 
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install java-11-openjdk-devel \
-    && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \
-    && rpm --rebuilddb \
+    && dnf clean all && rm -rf /var/log/* \
     && curl https://downloads.apache.org/ant/binaries/apache-ant-1.10.14-bin.tar.bz2 -o /tmp/apache-ant-1.10.14-bin.tar.bz2 \
     && tar -xjf /tmp/apache-ant-1.10.14-bin.tar.bz2 -C /opt \
     && rm -f /tmp/apache-ant-1.10.14-bin.tar.bz2 \

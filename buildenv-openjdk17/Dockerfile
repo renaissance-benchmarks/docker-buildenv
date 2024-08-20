@@ -13,7 +13,6 @@ RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install
     && dnf -y --setopt install_weak_deps=false --repo fedora --repo updates update
 
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install java-17-openjdk-devel \
-    && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \
-    && rpm --rebuilddb
+    && dnf clean all && rm -rf /var/log/*
 
 CMD ["/bin/bash"]
