@@ -171,6 +171,10 @@ COMMON_PACKAGES = [
 
 DOCKER_CONFIG = "version.rc"
 
+DOCKERFILE_COMMON = {
+    'final_cleanup_commands': 'rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \\\n    && rpm --rebuilddb',
+}
+
 DOCKERFILE_TEMPLATE_FROM_PACKAGE = '''
 # WARNING: generated file, use update.py for updates
 
@@ -186,8 +190,7 @@ RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install
     && dnf -y --setopt install_weak_deps=false --repo fedora --repo updates update
 
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install {package} \\
-    && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \\
-    && rpm --rebuilddb{extra_commands}
+    && {common[final_cleanup_commands]}{extra_commands}
 
 CMD ["/bin/bash"]
 '''
@@ -207,8 +210,7 @@ LABEL vendor=renaissance.dev
 LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant {image_variant})"
 
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install {install_packages} \\
-    && rm -rf /var/log/* /var/lib/dnf/* /var/cache/dnf/* \\
-    && rpm --rebuilddb
+    && {common[final_cleanup_commands]}{extra_commands}
 
 RUN curl -L "{tarball_url}" | tar -xz -C /opt \\
     && alternatives --install /usr/bin/java java /opt/{tarball_basedir}/bin/java 10 \\
@@ -291,6 +293,7 @@ def update_version(dockerfile, config: dict, docker_config: dict):
         install_packages=install_packages,
         maintainer_email=config['maintainer'],
         extra_commands=extra_commands,
+        common=DOCKERFILE_COMMON,
     )
 
     if 'package' in config:
