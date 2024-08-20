@@ -1,11 +1,11 @@
 
 # WARNING: generated file, use update.py for updates
 
-FROM fedora:39
+FROM fedora:40
 LABEL org.opencontainers.image.authors="horky@d3s.mff.cuni.cz"
 LABEL maintainer="horky@d3s.mff.cuni.cz"
 LABEL name=renaissance-buildenv
-LABEL version=v10-openjdk11-with-ant-gcc
+LABEL version=v11-openjdk11-with-ant-gcc
 LABEL vendor=renaissance.dev
 LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant openjdk11-with-ant-gcc)"
 
