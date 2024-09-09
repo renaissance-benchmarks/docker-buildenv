@@ -29,6 +29,7 @@ VERSIONS = [
         "command_vars": {
             "ANT_VERSION": "1.10.14",
         },
+        "dependabot_checks": True,
     },
     {
         "name": "openjdk9",
@@ -257,6 +258,8 @@ GITHUB_DEPENDABOT_FILENAME = '.github/dependabot.yml'
 GITHUB_DEPENDABOT_HEADER = '''
 version: 2
 
+# WARNING: generated file, use update.py for updates
+
 # Multiple directories not working properly
 # See https://github.com/dependabot/dependabot-core/issues/2178
 
@@ -344,7 +347,8 @@ def main():
     with open(GITHUB_DEPENDABOT_FILENAME, 'w') as f:
         print(GITHUB_DEPENDABOT_HEADER, file=f)
         for version_config in VERSIONS:
-            print(GITHUB_DEPENDABOT_TEMPLATE.format(**version_config), file=f)
+            if version_config.get('dependabot_checks', False):
+                print(GITHUB_DEPENDABOT_TEMPLATE.format(**version_config), file=f)
 
 if __name__ == '__main__':
     main()
