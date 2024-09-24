@@ -212,14 +212,26 @@ jobs:
 
 
 
-  image-openjdk23-ea:
+  image-openjdk23:
     permissions:
       contents: read
       packages: write
       id-token: write
     uses: ./.github/workflows/lib-build-image.yml
     with:
-      name: openjdk23-ea
+      name: openjdk23
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-openjdk24-ea:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: openjdk24-ea
       push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
 
 

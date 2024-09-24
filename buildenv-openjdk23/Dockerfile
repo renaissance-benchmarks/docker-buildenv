@@ -5,14 +5,14 @@ FROM fedora:40
 LABEL org.opencontainers.image.authors="horky@d3s.mff.cuni.cz"
 LABEL maintainer="horky@d3s.mff.cuni.cz"
 LABEL name=renaissance-buildenv
-LABEL version=v11-openjdk23-ea
+LABEL version=v12-openjdk23
 LABEL vendor=renaissance.dev
-LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant openjdk23-ea)"
+LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant openjdk23)"
 
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install ca-certificates git unzip \
     && dnf clean all && rm -rf /var/log/*
 
-RUN curl -L "https://download.java.net/java/early_access/jdk23/18/GPL/openjdk-23-ea+18_linux-x64_bin.tar.gz" | tar -xz -C /opt \
+RUN curl -L "https://download.java.net/java/GA/jdk23/3c5b90190c68498b986a97f276efd28a/37/GPL/openjdk-23_linux-x64_bin.tar.gz" | tar -xz -C /opt \
     && alternatives --install /usr/bin/java java /opt/jdk-23/bin/java 10 \
     && for i in /opt/jdk-23/bin/*; do \
         ii="$( basename "$i" )"; \
