@@ -141,7 +141,7 @@ VERSIONS = [
     {
         "name": "openjdk24-ea",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/java/early_access/jdk24/16/GPL/openjdk-24-ea+16_linux-x64_bin.tar.gz",
+        "tarball": "https://download.java.net/java/early_access/jdk24/22/GPL/openjdk-24-ea+22_linux-x64_bin.tar.gz",
         "basedir": "jdk-24",
     },
     {
