@@ -139,10 +139,16 @@ VERSIONS = [
         "basedir": "jdk-23",
     },
     {
-        "name": "openjdk24-ea",
+        "name": "openjdk24",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/java/early_access/jdk24/22/GPL/openjdk-24-ea+22_linux-x64_bin.tar.gz",
+        "tarball": "https://download.java.net/java/GA/jdk24/1f9ff9062db4449d8ca828c504ffae90/36/GPL/openjdk-24_linux-x64_bin.tar.gz",
         "basedir": "jdk-24",
+    },
+    {
+        "name": "openjdk25-ea",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://download.java.net/java/early_access/jdk25/16/GPL/openjdk-25-ea+16_linux-x64_bin.tar.gz",
+        "basedir": "jdk-25",
     },
     {
         "name": "openj9-openjdk8",
