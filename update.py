@@ -129,14 +129,14 @@ VERSIONS = [
     {
         "name": "openjdk22",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/java/GA/jdk22.0.1/c7ec1332f7bb44aeba2eb341ae18aca4/8/GPL/openjdk-22.0.1_linux-x64_bin.tar.gz",
-        "basedir": "jdk-22.0.1",
+        "tarball": "https://download.java.net/java/GA/jdk22.0.2/c9ecb94cd31b495da20a27d4581645e8/9/GPL/openjdk-22.0.2_linux-x64_bin.tar.gz",
+        "basedir": "jdk-22.0.2",
     },
     {
         "name": "openjdk23",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/java/GA/jdk23/3c5b90190c68498b986a97f276efd28a/37/GPL/openjdk-23_linux-x64_bin.tar.gz",
-        "basedir": "jdk-23",
+        "tarball": "https://download.java.net/java/GA/jdk23.0.2/6da2a6609d6e406f85c491fcb119101b/7/GPL/openjdk-23.0.2_linux-x64_bin.tar.gz",
+        "basedir": "jdk-23.0.2",
     },
     {
         "name": "openjdk24",
