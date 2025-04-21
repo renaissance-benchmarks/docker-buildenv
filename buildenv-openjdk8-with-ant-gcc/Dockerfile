@@ -1,7 +1,7 @@
 
 # WARNING: generated file, use update.py for updates
 
-FROM fedora:41
+FROM fedora:42
 LABEL org.opencontainers.image.authors="horky@d3s.mff.cuni.cz"
 LABEL maintainer="horky@d3s.mff.cuni.cz"
 LABEL name=renaissance-buildenv
