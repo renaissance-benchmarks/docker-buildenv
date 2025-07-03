@@ -8,12 +8,14 @@ VERSIONS = [
     {
         "name": "openjdk8",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "package": "java-1.8.0-openjdk-devel",
+        "tarball": "https://download.java.net/openjdk/jdk8u44/ri/openjdk-8u44-linux-x64.tar.gz",
+        "basedir": "java-se-8u44-ri",
     },
     {
         "name": "openjdk8-with-ant-gcc",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "package": "java-1.8.0-openjdk-devel",
+        "tarball": "https://download.java.net/openjdk/jdk8u44/ri/openjdk-8u44-linux-x64.tar.gz",
+        "basedir": "java-se-8u44-ri",
         "extra_packages": [
             "gcc",
             "bzip2",
@@ -46,12 +48,14 @@ VERSIONS = [
     {
         "name": "openjdk11",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "package": "java-11-openjdk-devel",
+        "tarball": "https://download.java.net/openjdk/jdk11.0.0.2/ri/openjdk-11.0.0.2_linux-x64.tar.gz",
+        "basedir": "jdk-11.0.0.2",
     },
     {
         "name": "openjdk11-with-ant-gcc",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "package": "java-11-openjdk-devel",
+        "tarball": "https://download.java.net/openjdk/jdk11.0.0.2/ri/openjdk-11.0.0.2_linux-x64.tar.gz",
+        "basedir": "jdk-11.0.0.2",
         "extra_packages": [
             "gcc",
             "bzip2",
