@@ -227,7 +227,7 @@ LABEL vendor=renaissance.dev
 LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant {image_variant})"
 
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install {install_packages} \\
-    && {common[final_cleanup_commands]}{extra_commands}
+    && {common[final_cleanup_commands]}
 
 RUN curl -L "{tarball_url}" | tar -xz -C /opt \\
     && alternatives --install /usr/bin/java java /opt/{tarball_basedir}/bin/java 10 \\
