@@ -48,14 +48,14 @@ VERSIONS = [
     {
         "name": "openjdk11",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/openjdk/jdk11.0.0.2/ri/openjdk-11.0.0.2_linux-x64.tar.gz",
-        "basedir": "jdk-11.0.0.2",
+        "tarball": "https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz",
+        "basedir": "jdk-11.0.2",
     },
     {
         "name": "openjdk11-with-ant-gcc",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/openjdk/jdk11.0.0.2/ri/openjdk-11.0.0.2_linux-x64.tar.gz",
-        "basedir": "jdk-11.0.0.2",
+        "tarball": "https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz",
+        "basedir": "jdk-11.0.2",
         "extra_packages": [
             "gcc",
             "bzip2",
@@ -105,7 +105,8 @@ VERSIONS = [
     {
         "name": "openjdk17",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "package": "java-17-openjdk-devel",
+        "tarball": "https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz",
+        "basedir": "jdk-17.0.2",
     },
     {
         "name": "openjdk18",
