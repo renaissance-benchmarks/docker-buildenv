@@ -157,26 +157,26 @@ VERSIONS = [
     {
         "name": "openj9-openjdk8",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://github.com/ibmruntimes/semeru8-binaries/releases/download/jdk8u402-b06_openj9-0.43.0/ibm-semeru-open-jdk_x64_linux_8u402b06_openj9-0.43.0.tar.gz",
-        "basedir": "jdk8u402-b06",
+        "tarball": "https://github.com/ibmruntimes/semeru8-binaries/releases/download/jdk8u452-b09_openj9-0.51.0/ibm-semeru-open-jdk_x64_linux_8u452b09_openj9-0.51.0.tar.gz",
+        "basedir": "jdk8u452-b09",
     },
     {
         "name": "openj9-openjdk11",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://github.com/ibmruntimes/semeru11-binaries/releases/download/jdk-11.0.22%2B7_openj9-0.43.0/ibm-semeru-open-jdk_x64_linux_11.0.22_7_openj9-0.43.0.tar.gz",
-        "basedir": "jdk-11.0.22+7",
+        "tarball": "https://github.com/ibmruntimes/semeru11-binaries/releases/download/jdk-11.0.27%2B6_openj9-0.51.0/ibm-semeru-open-jdk_x64_linux_11.0.27_6_openj9-0.51.0.tar.gz",
+        "basedir": "jdk-11.0.27+6",
     },
     {
         "name": "openj9-openjdk17",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://github.com/ibmruntimes/semeru17-binaries/releases/download/jdk-17.0.9%2B9_openj9-0.41.0/ibm-semeru-open-jdk_x64_linux_17.0.9_9_openj9-0.41.0.tar.gz",
-        "basedir": "jdk-17.0.9+9",
+        "tarball": "https://github.com/ibmruntimes/semeru17-binaries/releases/download/jdk-17.0.15%2B6_openj9-0.51.0/ibm-semeru-open-jdk_x64_linux_17.0.15_6_openj9-0.51.0.tar.gz",
+        "basedir": "jdk-17.0.15+6",
     },
     {
         "name": "openj9-openjdk21",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://github.com/ibmruntimes/semeru21-binaries/releases/download/jdk-21.0.2%2B13_openj9-0.43.0/ibm-semeru-open-jdk_x64_linux_21.0.2_13_openj9-0.43.0.tar.gz",
-        "basedir": "jdk-21.0.2+13",
+        "tarball": "https://github.com/ibmruntimes/semeru21-binaries/releases/download/jdk-21.0.7%2B6_openj9-0.51.0/ibm-semeru-open-jdk_x64_linux_21.0.7_6_openj9-0.51.0.tar.gz",
+        "basedir": "jdk-21.0.7+6",
     },
 ]
 
