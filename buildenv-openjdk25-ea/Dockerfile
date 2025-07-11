@@ -12,7 +12,7 @@ LABEL org.opencontainers.image.description "Build environment for Renaissance be
 RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install ca-certificates git unzip \
     && dnf clean all && rm -rf /var/log/*
 
-RUN curl -L "https://download.java.net/java/early_access/jdk25/16/GPL/openjdk-25-ea+16_linux-x64_bin.tar.gz" | tar -xz -C /opt \
+RUN curl -L "https://download.java.net/java/early_access/jdk25/30/GPL/openjdk-25-ea+30_linux-x64_bin.tar.gz" | tar -xz -C /opt \
     && alternatives --install /usr/bin/java java /opt/jdk-25/bin/java 10 \
     && for i in /opt/jdk-25/bin/*; do \
         ii="$( basename "$i" )"; \

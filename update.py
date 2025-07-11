@@ -152,7 +152,7 @@ VERSIONS = [
     {
         "name": "openjdk25-ea",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/java/early_access/jdk25/16/GPL/openjdk-25-ea+16_linux-x64_bin.tar.gz",
+        "tarball": "https://download.java.net/java/early_access/jdk25/30/GPL/openjdk-25-ea+30_linux-x64_bin.tar.gz",
         "basedir": "jdk-25",
     },
     {
