@@ -5,7 +5,7 @@ FROM fedora:42
 LABEL org.opencontainers.image.authors="horky@d3s.mff.cuni.cz"
 LABEL maintainer="horky@d3s.mff.cuni.cz"
 LABEL name=renaissance-buildenv
-LABEL version=v16-openjdk8-with-ant-gcc
+LABEL version=v17-openjdk8-with-ant-gcc
 LABEL vendor=renaissance.dev
 LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant openjdk8-with-ant-gcc)"
 

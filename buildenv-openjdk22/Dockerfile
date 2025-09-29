@@ -5,7 +5,7 @@ FROM fedora:42
 LABEL org.opencontainers.image.authors="horky@d3s.mff.cuni.cz"
 LABEL maintainer="horky@d3s.mff.cuni.cz"
 LABEL name=renaissance-buildenv
-LABEL version=v16-openjdk22
+LABEL version=v17-openjdk22
 LABEL vendor=renaissance.dev
 LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant openjdk22)"
 
