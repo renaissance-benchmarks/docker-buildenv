@@ -156,9 +156,9 @@ VERSIONS = [
         "basedir": "jdk-25",
     },
     {
-        "name": "openjdk26-ea",
+        "name": "openjdk26",
         "maintainer": "horky@d3s.mff.cuni.cz",
-        "tarball": "https://download.java.net/java/early_access/jdk26/16/GPL/openjdk-26-ea+16_linux-x64_bin.tar.gz",
+        "tarball": "https://download.java.net/java/GA/jdk26/c3cc523845074aa0af4f5e1e1ed4151d/35/GPL/openjdk-26_linux-x64_bin.tar.gz",
         "basedir": "jdk-26",
     },
     {
