@@ -185,6 +185,37 @@ VERSIONS = [
         "tarball": "https://github.com/ibmruntimes/semeru21-binaries/releases/download/jdk-21.0.7%2B6_openj9-0.51.0/ibm-semeru-open-jdk_x64_linux_21.0.7_6_openj9-0.51.0.tar.gz",
         "basedir": "jdk-21.0.7+6",
     },
+    {
+        "name": "temurin-jdk8",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u482-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u482b08.tar.gz",
+        "basedir": "jdk8u482-b08",
+    },
+    {
+        "name": "temurin-jdk11",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.30%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.30_7.tar.gz",
+        "basedir": "jdk-11.0.30+7",
+    },
+    {
+        "name": "temurin-jdk17",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9/OpenJDK17U-jdk_x64_linux_hotspot_17.0.9_9.tar.gz",
+        "basedir": "jdk-17.0.9+9",
+    },
+    {
+        "name": "temurin-jdk21",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.9%2B10/OpenJDK21U-jdk_x64_linux_hotspot_21.0.9_10.tar.gz",
+        "basedir": "jdk-21.0.9+10",
+    },
+    {
+        "name": "temurin-jdk25",
+        "maintainer": "horky@d3s.mff.cuni.cz",
+        "tarball": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.2%2B10/OpenJDK25U-jdk_x64_linux_hotspot_25.0.2_10.tar.gz",
+        "basedir": "jdk-25.0.2+10",
+    },
+
 ]
 
 COMMON_PACKAGES = [

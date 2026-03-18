@@ -307,3 +307,63 @@ jobs:
       push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
 
 
+
+  image-temurin-jdk8:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: temurin-jdk8
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-temurin-jdk11:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: temurin-jdk11
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-temurin-jdk17:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: temurin-jdk17
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-temurin-jdk21:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: temurin-jdk21
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
+
+  image-temurin-jdk25:
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: ./.github/workflows/lib-build-image.yml
+    with:
+      name: temurin-jdk25
+      push: ${{ ((github.event_name == 'push') && contains(github.ref, '/tags/v')) }}
+
+
