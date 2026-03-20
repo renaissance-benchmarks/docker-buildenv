@@ -1,0 +1,26 @@
+
+# WARNING: generated file, use update.py for updates
+
+FROM fedora:42
+LABEL org.opencontainers.image.authors="horky@d3s.mff.cuni.cz"
+LABEL maintainer="horky@d3s.mff.cuni.cz"
+LABEL name=renaissance-buildenv
+LABEL version=v18-temurin-jdk17
+LABEL vendor=renaissance.dev
+LABEL org.opencontainers.image.description "Build environment for Renaissance benchmarks (variant temurin-jdk17)"
+
+RUN dnf -y --setopt install_weak_deps=false --repo fedora --repo updates install ca-certificates git unzip \
+    && dnf clean all && rm -rf /var/log/*
+
+RUN curl -L "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9/OpenJDK17U-jdk_x64_linux_hotspot_17.0.9_9.tar.gz" | tar -xz -C /opt \
+    && alternatives --install /usr/bin/java java /opt/jdk-17.0.9+9/bin/java 10 \
+    && for i in /opt/jdk-17.0.9+9/bin/*; do \
+        ii="$( basename "$i" )"; \
+        [ "$ii" != "java" ] \
+            && alternatives --add-slave java "/opt/jdk-17.0.9+9/bin/java" "/usr/bin/$ii" "$ii" "/opt/jdk-17.0.9+9/bin/$ii"; \
+    done \
+    && mkdir -p /opt/jdk-17.0.9+9/lib/security/ \
+    && ln -sf /etc/pki/java/cacerts /opt/jdk-17.0.9+9/lib/security/ \
+    && /opt/jdk-17.0.9+9/bin/java -version
+
+CMD ["/bin/bash"]
